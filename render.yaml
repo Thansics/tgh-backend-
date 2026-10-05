@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tgh-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ADMIN_KEY
+        sync: false
+      - key: WHATSAPP_TOKEN
+        sync: false
+      - key: WHATSAPP_PHONE_ID
+        sync: false
+      - key: GRANDMA_WHATSAPP_NUMBER
+        value: "2347071267515"
