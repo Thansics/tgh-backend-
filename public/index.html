@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thansics Grandma's Honey (TGH) — Homemade Honey & Handmade Brooms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  :root{
+    --cream:#FFF8EA;
+    --cream-2:#FCEFD4;
+    --walnut:#3B2412;
+    --walnut-soft:#6B5340;
+    --honey:#E8A33D;
+    --honey-dark:#C97F1E;
+    --rust:#B5461C;
+    --sage:#7C8B52;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    background:var(--cream);
+    color:var(--walnut);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.logo{font-family:'Fraunces', serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* honeycomb divider — signature motif */
+  .comb-divider{
+    display:flex; justify-content:center; gap:6px; padding:26px 0; background:var(--cream);
+  }
+  .comb-divider span{
+    width:22px; height:22px;
+    background:var(--honey);
+    clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    opacity:.55;
+  }
+  .comb-divider span:nth-child(2n){ opacity:.85; }
+  .comb-divider span:nth-child(3n){ opacity:.3; }
+
+  /* ---------- NAV ---------- */
+  header{ position:sticky; top:0; z-index:60; background:var(--cream); border-bottom:2px solid var(--honey); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1160px; margin:0 auto; }
+  .logo{ font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:10px; }
+  .logo .hex{
+    width:40px; height:40px; background:linear-gradient(160deg, var(--honey), var(--honey-dark));
+    clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display:flex; align-items:center; justify-content:center; font-size:1.15rem;
+  }
+  .logo small{ display:block; font-family:'Work Sans'; font-size:.65rem; font-weight:700; color:var(--walnut-soft); letter-spacing:.1em; }
+  .nav-links{ display:flex; gap:28px; list-style:none; font-weight:600; font-size:.92rem; }
+  .nav-links a{ padding:6px 2px; border-bottom:2px solid transparent; transition:border-color .2s, color .2s; }
+  .nav-links a:hover{ border-color:var(--rust); color:var(--rust); }
+  .nav-actions{ display:flex; align-items:center; gap:16px; }
+  .cart-btn{
+    position:relative; background:var(--walnut); color:var(--cream); font-weight:700;
+    padding:11px 20px; border-radius:999px; font-size:.85rem; border:2px solid var(--walnut);
+    transition:transform .15s ease, background .2s;
+  }
+  .cart-btn:hover{ transform:translateY(-2px); background:var(--rust); border-color:var(--rust); }
+  .cart-count{
+    position:absolute; top:-8px; right:-8px; background:var(--rust); color:#fff;
+    font-size:.68rem; font-weight:800; width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--cream);
+  }
+  .account-btn{
+    background:none; color:var(--walnut); font-weight:700; padding:9px 16px; border-radius:999px;
+    font-size:.85rem; border:2px solid var(--walnut-soft); transition:border-color .2s, color .2s;
+    max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .account-btn:hover{ border-color:var(--rust); color:var(--rust); }
+  .account-btn.logged-in{ background:var(--sage); border-color:var(--sage); color:#fff; }
+  .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; }
+  .burger span{ width:26px; height:3px; background:var(--walnut); border-radius:2px; }
+  .mobile-menu{ display:none; flex-direction:column; background:var(--cream-2); border-top:2px solid var(--honey); }
+  .mobile-menu a{ padding:14px 24px; font-weight:700; border-bottom:1px solid rgba(59,36,18,.1); }
+  .mobile-menu.open{ display:flex; }
+
+  /* ---------- HERO ---------- */
+  .hero{ background:var(--cream); padding:72px 0 40px; }
+  .hero .wrap{ display:grid; grid-template-columns:1.05fr .95fr; gap:54px; align-items:center; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; background:var(--honey); color:var(--walnut);
+    font-weight:800; font-size:.75rem; padding:7px 14px; border-radius:999px; text-transform:uppercase;
+    letter-spacing:.06em; margin-bottom:22px;
+  }
+  .hero h1{ font-size:clamp(2.1rem, 4vw, 3.3rem); line-height:1.14; font-weight:700; margin-bottom:20px; }
+  .hero h1 em{ font-style:normal; color:var(--rust); }
+  .hero p.lead{ font-size:1.08rem; color:var(--walnut-soft); max-width:480px; margin-bottom:30px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px; }
+  .btn-primary{
+    background:var(--rust); color:#fff; font-weight:700; padding:15px 26px; border-radius:999px;
+    border:2px solid var(--rust); font-size:.98rem; box-shadow:0 6px 0 var(--walnut);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{ transform:translateY(3px); box-shadow:0 3px 0 var(--walnut); }
+  .btn-ghost{
+    background:transparent; color:var(--walnut); font-weight:700; padding:15px 24px; border-radius:999px;
+    border:2px solid var(--walnut); font-size:.98rem; transition:background .2s, color .2s;
+  }
+  .btn-ghost:hover{ background:var(--walnut); color:var(--cream); }
+  .hero-stats{ display:flex; gap:32px; flex-wrap:wrap; }
+  .hero-stats div strong{ display:block; font-family:'Fraunces'; font-size:1.4rem; color:var(--sage); }
+  .hero-stats div span{ font-size:.8rem; color:var(--walnut-soft); font-weight:700; }
+
+  .hero-art{ position:relative; display:flex; justify-content:center; }
+  .jar-card{
+    position:relative; width:300px; max-width:100%; background:var(--cream-2);
+    border:2px solid var(--walnut); border-radius:var(--radius); padding:30px 24px;
+    transform:rotate(-2deg); box-shadow:8px 10px 0 rgba(59,36,18,.12);
+  }
+  .jar-card .emoji-big{ text-align:center; font-size:3.2rem; margin-bottom:12px; }
+  .jar-card h3{ font-size:1.1rem; text-align:center; margin-bottom:6px; }
+  .jar-card p{ text-align:center; font-size:.82rem; color:var(--walnut-soft); font-weight:600; margin-bottom:16px; }
+  .badge-row{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+  .badge-row span{
+    background:var(--sage); color:#fff; font-size:.68rem; font-weight:700; padding:5px 10px;
+    border-radius:999px; letter-spacing:.03em;
+  }
+  .float-hex{ position:absolute; font-size:1.8rem; opacity:.9; }
+  .fh1{ top:-14px; right:8%; } .fh2{ bottom:-10px; left:-8%; font-size:1.5rem; }
+
+  /* ---------- IMAGE / BANNER SECTION ---------- */
+  .banner{ background:var(--walnut); padding:0; }
+  .banner-inner{ max-width:1160px; margin:0 auto; padding:0 24px; }
+  .banner-visual{
+    background:linear-gradient(135deg, var(--honey-dark), var(--rust));
+    border-radius:var(--radius); margin:66px 0; padding:52px 40px; text-align:center; position:relative;
+  }
+  .banner-visual .grid-emoji{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:16px; max-width:520px; margin:0 auto 26px; font-size:2.2rem;
+  }
+  .banner-visual .grid-emoji span{ filter:drop-shadow(0 3px 0 rgba(0,0,0,.2)); }
+  .banner-visual h2{ color:#fff; font-size:1.7rem; margin-bottom:10px; }
+  .banner-visual p{ color:#ffe6c6; font-weight:600; max-width:460px; margin:0 auto; }
+
+  /* ---------- ABOUT GRANDMA ---------- */
+  .about{ background:var(--cream); padding:70px 0; }
+  .about .wrap{ display:grid; grid-template-columns:.9fr 1.1fr; gap:48px; align-items:center; }
+  .about-portrait{
+    width:100%; aspect-ratio:1/1; max-width:280px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--honey), var(--honey-dark));
+    display:flex; align-items:center; justify-content:center; font-size:5rem;
+    border:4px solid var(--walnut); margin:0 auto;
+  }
+  .about h2{ font-size:clamp(1.6rem,3vw,2rem); margin-bottom:14px; }
+  .about p{ color:var(--walnut-soft); margin-bottom:14px; max-width:520px; }
+
+  /* ---------- PRODUCTS ---------- */
+  .products{ background:var(--cream); padding:20px 0 90px; }
+  .section-head{ text-align:center; max-width:600px; margin:0 auto 48px; }
+  .section-head .eyebrow{ background:var(--sage); color:#fff; }
+  .section-head h2{ font-size:clamp(1.7rem,3vw,2.2rem); margin-bottom:10px; }
+  .section-head p{ color:var(--walnut-soft); }
+  .product-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; max-width:960px; margin:0 auto; }
+  .product-card{
+    background:var(--cream-2); border:2px solid var(--walnut); border-radius:var(--radius);
+    padding:28px; display:flex; flex-direction:column; align-items:center; text-align:center;
+  }
+  .product-emoji{ font-size:3.4rem; margin-bottom:14px; }
+  .product-card h3{ font-size:1.2rem; margin-bottom:6px; }
+  .product-card .desc{ font-size:.86rem; color:var(--walnut-soft); margin-bottom:14px; min-height:40px; }
+  .product-price{ font-family:'Fraunces'; font-size:1.4rem; color:var(--rust); font-weight:700; margin-bottom:18px; }
+  .qty-row{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+  .qty-row button{
+    width:32px; height:32px; border-radius:50%; border:2px solid var(--walnut); background:var(--cream);
+    font-weight:800; font-size:1rem; display:flex; align-items:center; justify-content:center;
+  }
+  .qty-row span{ font-weight:700; min-width:20px; }
+  .add-btn{
+    width:100%; background:var(--rust); color:#fff; font-weight:700; padding:13px 20px;
+    border-radius:999px; border:2px solid var(--rust); font-size:.92rem; transition:background .2s, transform .15s;
+  }
+  .add-btn:hover{ transform:translateY(-2px); background:var(--honey-dark); border-color:var(--honey-dark); }
+  .add-btn.added{ background:var(--sage); border-color:var(--sage); }
+
+  /* ---------- CART / ORDER MODAL ---------- */
+  .overlay{
+    display:none; position:fixed; inset:0; background:rgba(59,36,18,.55); z-index:100;
+    align-items:flex-start; justify-content:center; padding:60px 16px; overflow-y:auto;
+  }
+  .overlay.open{ display:flex; }
+  .cart-panel{
+    background:var(--cream); border-radius:var(--radius); max-width:460px; width:100%;
+    padding:30px 26px; position:relative; border:2px solid var(--walnut);
+  }
+  .close-btn{
+    position:absolute; top:16px; right:18px; background:none; border:none; font-size:1.3rem; color:var(--walnut-soft);
+  }
+  .cart-panel h3{ font-size:1.3rem; margin-bottom:18px; }
+  .cart-items{ display:flex; flex-direction:column; gap:14px; margin-bottom:18px; max-height:220px; overflow-y:auto; }
+  .cart-item{ display:flex; justify-content:space-between; align-items:center; font-size:.9rem; border-bottom:1px dashed var(--walnut-soft); padding-bottom:10px; }
+  .cart-item .name{ font-weight:700; }
+  .cart-item .remove{ background:none; border:none; color:var(--rust); font-weight:700; font-size:.8rem; }
+  .cart-empty{ font-size:.88rem; color:var(--walnut-soft); font-style:italic; }
+  .cart-total{ display:flex; justify-content:space-between; font-weight:800; font-size:1.05rem; margin-bottom:20px; padding-top:6px; }
+  .order-form{ display:flex; flex-direction:column; gap:12px; }
+  .order-form input, .order-form textarea{
+    width:100%; padding:11px 14px; border-radius:8px; border:2px solid var(--walnut-soft); font-size:.88rem;
+    font-family:inherit; background:var(--cream-2); color:var(--walnut);
+  }
+  .order-form textarea{ resize:vertical; min-height:60px; }
+  .order-form input:focus, .order-form textarea:focus{ outline:2px solid var(--honey); border-color:var(--honey); }
+  .place-order-btn{
+    background:var(--walnut); color:var(--cream); font-weight:700; padding:14px; border-radius:999px;
+    border:2px solid var(--walnut); font-size:.95rem; margin-top:4px; transition:background .2s;
+  }
+  .place-order-btn:hover{ background:var(--rust); border-color:var(--rust); }
+  .place-order-btn:disabled{ opacity:.6; cursor:not-allowed; }
+  .form-error{ color:var(--rust); font-size:.78rem; display:none; }
+  .form-error.show{ display:block; }
+
+  .confirm-view{ display:none; text-align:center; }
+  .confirm-view.show{ display:block; }
+  .confirm-view .check{ font-size:3rem; margin-bottom:10px; }
+  .confirm-view h3{ margin-bottom:8px; }
+  .confirm-view p{ color:var(--walnut-soft); font-size:.92rem; margin-bottom:6px; }
+  .order-id{ background:var(--cream-2); border:2px dashed var(--honey-dark); border-radius:10px; padding:12px; font-weight:800; letter-spacing:.05em; margin:16px 0; }
+  .confirm-close{
+    background:var(--rust); color:#fff; font-weight:700; padding:12px 26px; border-radius:999px; border:none; margin-top:10px;
+  }
+
+  /* ---------- ACCOUNT / AUTH MODAL ---------- */
+  .auth-tabs{ display:flex; gap:8px; margin-bottom:20px; background:var(--cream-2); border-radius:999px; padding:4px; }
+  .auth-tab{
+    flex:1; background:none; border:none; padding:9px; border-radius:999px; font-weight:700; font-size:.85rem;
+    color:var(--walnut-soft); transition:background .2s, color .2s;
+  }
+  .auth-tab.active{ background:var(--walnut); color:var(--cream); }
+  .auth-view{ display:none; }
+  .auth-view.show{ display:block; }
+  .auth-welcome{ text-align:center; }
+  .auth-welcome .check{ font-size:2.4rem; margin-bottom:6px; }
+  .auth-welcome h3{ margin-bottom:4px; }
+  .auth-welcome p{ color:var(--walnut-soft); font-size:.9rem; margin-bottom:18px; }
+  .account-orders{ text-align:left; margin:18px 0; display:flex; flex-direction:column; gap:12px; max-height:260px; overflow-y:auto; }
+  .account-order{ border:1px dashed var(--walnut-soft); border-radius:10px; padding:12px; font-size:.85rem; }
+  .account-order .oid{ font-weight:800; }
+  .account-order .ostatus{
+    display:inline-block; background:var(--honey); color:var(--walnut); font-size:.7rem; font-weight:800;
+    padding:2px 10px; border-radius:999px; margin-left:6px; text-transform:capitalize;
+  }
+  .account-order .oitems{ color:var(--walnut-soft); margin-top:4px; }
+  .account-orders-empty{ font-size:.88rem; color:var(--walnut-soft); font-style:italic; text-align:center; }
+  .logout-btn{
+    width:100%; background:none; color:var(--rust); font-weight:700; padding:12px; border-radius:999px;
+    border:2px solid var(--rust); font-size:.9rem; margin-top:8px;
+  }
+  .logout-btn:hover{ background:var(--rust); color:#fff; }
+  .forgot-pw{ text-align:center; font-size:.82rem; color:var(--walnut-soft); margin-top:14px; }
+  .forgot-pw a{ color:var(--rust); font-weight:700; text-decoration:underline; }
+  .verify-note{ font-size:.88rem; color:var(--walnut-soft); margin-bottom:16px; }
+  #verifyCode{ letter-spacing:6px; font-size:1.2rem; text-align:center; font-weight:800; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--walnut); color:var(--cream); padding-top:20px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:36px; padding:50px 0 34px; }
+  .footer-grid h4{ font-family:'Fraunces'; font-size:1rem; margin-bottom:16px; color:var(--honey); }
+  .footer-grid p{ color:#d9c6b0; font-size:.9rem; max-width:260px; }
+  .footer-grid ul{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid a{ color:#d9c6b0; font-size:.9rem; transition:color .2s; }
+  .footer-grid a:hover{ color:var(--honey); }
+  .newsletter{ display:flex; gap:8px; margin-top:14px; }
+  .newsletter input{ flex:1; padding:11px 14px; border-radius:999px; border:none; font-size:.85rem; background:#2A190C; color:var(--cream); }
+  .newsletter input::placeholder{ color:#a9927f; }
+  .newsletter button{ background:var(--rust); color:#fff; border:none; padding:11px 18px; border-radius:999px; font-weight:700; font-size:.85rem; }
+  .footer-bottom{
+    border-top:1px solid rgba(255,248,234,.15); padding:20px 0 30px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-size:.8rem; color:#a9927f;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .nav-links{ display:none; }
+    .burger{ display:flex; }
+    .hero .wrap, .about .wrap{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; margin-bottom:6px; }
+    .about-portrait{ order:-1; }
+    .product-grid{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* ---------- SHARE / QR SECTION ---------- */
+  .share{ background:var(--cream-2); padding:70px 0; }
+  .share-panel{
+    max-width:820px; margin:0 auto; background:var(--cream); border:2px solid var(--walnut);
+    border-radius:var(--radius); padding:40px; display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center;
+  }
+  .share-qr{
+    background:#fff; padding:12px; border-radius:14px; border:2px solid var(--walnut);
+    width:172px; height:172px; display:flex; align-items:center; justify-content:center;
+  }
+  .share-qr img{ width:100%; height:100%; border-radius:6px; }
+  .share-copy h3{ font-size:1.25rem; margin-bottom:8px; }
+  .share-copy p{ color:var(--walnut-soft); font-size:.92rem; margin-bottom:18px; }
+  .share-link-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .share-link-row input{
+    flex:1; min-width:180px; padding:12px 14px; border-radius:10px; border:2px solid var(--walnut-soft);
+    font-family:inherit; font-size:.85rem; background:var(--cream-2); color:var(--walnut);
+  }
+  .share-link-row button{
+    background:var(--rust); color:#fff; font-weight:700; padding:12px 18px; border-radius:10px;
+    border:2px solid var(--rust); font-size:.85rem; white-space:nowrap; transition:background .2s;
+  }
+  .share-link-row button:hover{ background:var(--honey-dark); border-color:var(--honey-dark); }
+  .share-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+  .share-actions button{
+    background:transparent; color:var(--walnut); font-weight:700; padding:11px 18px; border-radius:999px;
+    border:2px solid var(--walnut); font-size:.82rem; transition:background .2s, color .2s;
+  }
+  .share-actions button:hover{ background:var(--walnut); color:var(--cream); }
+  .copied-msg{ font-size:.78rem; color:var(--sage); font-weight:700; margin-top:8px; display:none; }
+  .copied-msg.show{ display:block; }
+
+  @media (max-width:640px){
+    .share-panel{ grid-template-columns:1fr; text-align:center; }
+    .share-qr{ margin:0 auto; }
+    .share-link-row, .share-actions{ justify-content:center; }
+  }
+
+
+  @media (max-width:560px){
+    .hero{ padding:46px 0 30px; }
+    .banner-visual{ padding:36px 20px; margin:44px 0; }
+    .banner-visual .grid-emoji{ grid-template-columns:repeat(4,1fr); font-size:1.8rem; }
+    .product-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------- FLOATING WHATSAPP BUTTON ---------- */
+  .whatsapp-float{
+    position:fixed; bottom:22px; right:22px; z-index:70;
+    background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    box-shadow:0 6px 16px rgba(0,0,0,.25); transition:transform .15s ease;
+  }
+  .whatsapp-float:hover{ transform:scale(1.08); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo"><span class="hex">🍯</span><span>Thansics Grandma's Honey<small>TGH · EST. HOMEMADE</small></span></a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About Grandma</a></li>
+      <li><a href="#share">Share</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="account-btn" id="accountBtn" onclick="openAuth()">👤 <span id="accountBtnLabel">Login</span></button>
+      <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+      <button class="burger" aria-label="Toggle menu" onclick="document.getElementById('mmenu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mmenu">
+    <a href="#products">Products</a>
+    <a href="#about">About Grandma</a>
+    <a href="#share">Share</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">🐝 Small-batch & handmade</span>
+      <h1>Real honey. Handmade brooms. <em>Grandma-approved.</em></h1>
+      <p class="lead">Thansics Grandma's Honey (TGH) brings raw honey straight from the hive and sturdy handwoven brooms straight from her workshop — no shortcuts, just how she's always made them.</p>
+      <div class="hero-ctas">
+        <a href="#products" class="btn-primary">Shop Now</a>
+        <a href="#about" class="btn-ghost">Meet Grandma</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>100%</strong><span>Raw & natural</span></div>
+        <div><strong>2</strong><span>Signature products</span></div>
+        <div><strong>4.9★</strong><span>Customer rating</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <span class="float-hex fh1">🐝</span>
+      <span class="float-hex fh2">🧹</span>
+      <div class="jar-card">
+        <div class="emoji-big">🍯</div>
+        <h3>Grandma's Golden Jar</h3>
+        <p>Raw wildflower honey, bottled by hand</p>
+        <div class="badge-row"><span>No additives</span><span>Small batch</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="comb-divider">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<section class="banner">
+  <div class="banner-inner">
+    <div class="banner-visual">
+      <div class="grid-emoji">
+        <span>🍯</span><span>🐝</span><span>🧹</span><span>🌾</span><span>🏡</span><span>🍞</span>
+        <span>🌻</span><span>🫙</span><span>🪵</span><span>🧺</span><span>🌼</span><span>🕯️</span>
+      </div>
+      <h2>From Grandma's Kitchen to Your Doorstep</h2>
+      <p>Every jar is hand-poured and every broom hand-tied — the same way TGH has done it for years.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-portrait">👵</div>
+    <div>
+      <span class="eyebrow" style="background:var(--sage);color:#fff;">💛 The story</span>
+      <h2>Meet the Grandma behind TGH</h2>
+      <p>Thansics Grandma has been keeping bees and weaving brooms for as long as anyone in the family can remember. What started as jars shared with neighbors turned into TGH — honey and brooms made exactly the way she's always made them, just for a few more doorsteps now.</p>
+      <p>No factories, no fillers — just patience, bees, and good broom-corn.</p>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">🛍️ Order Grandma's goods</span>
+      <h2>Pick your favorites</h2>
+      <p>Add what you need, then check out below — Grandma's already warming up the ladle.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-emoji">🍯</div>
+        <h3>Honey — Small Bottle</h3>
+        <p class="desc">Raw wildflower honey, hand-poured and unfiltered.</p>
+        <div class="product-price">₦500</div>
+        <div class="qty-row">
+          <button onclick="changeQty('honey-small', -1)">−</button>
+          <span id="qty-honey-small">1</span>
+          <button onclick="changeQty('honey-small', 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-honey-small" onclick="addToCart('honey-small', 'Honey — Small Bottle 🍯', 500)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <div class="product-emoji">🍯</div>
+        <h3>Honey — Medium Bottle</h3>
+        <p class="desc">Raw wildflower honey, hand-poured and unfiltered.</p>
+        <div class="product-price">₦1,000</div>
+        <div class="qty-row">
+          <button onclick="changeQty('honey-medium', -1)">−</button>
+          <span id="qty-honey-medium">1</span>
+          <button onclick="changeQty('honey-medium', 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-honey-medium" onclick="addToCart('honey-medium', 'Honey — Medium Bottle 🍯', 1000)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <div class="product-emoji">🍯</div>
+        <h3>Honey — Large Bottle</h3>
+        <p class="desc">Raw wildflower honey, hand-poured and unfiltered.</p>
+        <div class="product-price">₦3,000</div>
+        <div class="qty-row">
+          <button onclick="changeQty('honey-large', -1)">−</button>
+          <span id="qty-honey-large">1</span>
+          <button onclick="changeQty('honey-large', 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-honey-large" onclick="addToCart('honey-large', 'Honey — Large Bottle 🍯', 3000)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <div class="product-emoji">🍯</div>
+        <h3>Honey — Extra Large Bottle</h3>
+        <p class="desc">Raw wildflower honey, hand-poured and unfiltered.</p>
+        <div class="product-price">₦5,000</div>
+        <div class="qty-row">
+          <button onclick="changeQty('honey-xl', -1)">−</button>
+          <span id="qty-honey-xl">1</span>
+          <button onclick="changeQty('honey-xl', 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-honey-xl" onclick="addToCart('honey-xl', 'Honey — Extra Large Bottle 🍯', 5000)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <div class="product-emoji">🧹</div>
+        <h3>Handwoven Broom</h3>
+        <p class="desc">Sturdy broom-corn bristles, tied and trimmed by hand — sold per piece.</p>
+        <div class="product-price">₦200</div>
+        <div class="qty-row">
+          <button onclick="changeQty('broom', -1)">−</button>
+          <span id="qty-broom">1</span>
+          <button onclick="changeQty('broom', 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-broom" onclick="addToCart('broom', 'Handwoven Broom 🧹', 200)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="share" id="share">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">📲 Spread the word</span>
+      <h2>Share TGH with someone who needs it</h2>
+      <p>Scan the QR code or copy the link below to send this page to friends, family, or customers.</p>
+    </div>
+    <div class="share-panel">
+      <div class="share-qr">
+        <img id="qrImage" src="" alt="QR code linking to this page">
+      </div>
+      <div class="share-copy">
+        <h3>🔗 Get the platform instantly</h3>
+        <p>Scan with any phone camera, or copy the link and send it on WhatsApp, SMS, or email.</p>
+        <div class="share-link-row">
+          <input type="text" id="shareLinkInput" readonly>
+          <button onclick="copyShareLink()">Copy Link</button>
+        </div>
+        <div class="share-actions">
+          <button onclick="nativeShare()">📤 Share</button>
+          <a href="#" id="whatsappShareBtn" target="_blank" rel="noopener"><button type="button">💬 Share via WhatsApp</button></a>
+        </div>
+        <p class="copied-msg" id="copiedMsg">✅ Link copied to clipboard!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <h4>🍯 TGH</h4>
+      <p>Thansics Grandma's Honey — homemade honey and handmade brooms, made with patience and love.</p>
+      <div class="newsletter">
+        <input type="email" placeholder="Your email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#products">Honey</a></li>
+        <li><a href="#products">Brooms</a></li>
+        <li><a href="#products">Order Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Grandma</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/terms.html">Terms & Privacy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Reach Us</h4>
+      <p>Bakin Rumfa Kolkos 1<br>Billiri LGA, Gombe State<br>Nigeria</p>
+      <p><a href="https://wa.me/2348168037487" target="_blank" rel="noopener">💬 WhatsApp: 0816 803 7487</a></p>
+      <p>Grandma's Line: 0707 126 7515</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Thansics Grandma's Honey (TGH). All rights reserved.</span>
+    <span><a href="/terms.html" style="color:inherit;">Terms & Privacy</a> · Made with love, one jar at a time.</span>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/2348168037487?text=Hi%20TGH!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="Order via WhatsApp">💬</a>
+
+<div class="overlay" id="cartOverlay">
+  <div class="cart-panel">
+    <button class="close-btn" onclick="closeCart()">✕</button>
+
+    <div id="cartView">
+      <h3>🛒 Your Cart</h3>
+      <div class="cart-items" id="cartItems">
+        <p class="cart-empty">Your cart is empty. Add some honey or a broom!</p>
+      </div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₦0</span>
+      </div>
+      <form class="order-form" id="orderForm">
+        <input type="text" id="custName" placeholder="Full name" required>
+        <input type="tel" id="custPhone" placeholder="Phone number" required>
+        <input type="email" id="custEmail" placeholder="Email (optional — for order updates)">
+        <textarea id="custAddress" placeholder="Delivery address" required></textarea>
+        <p class="form-error" id="formError">Please fill in all fields and add at least one item.</p>
+        <button type="submit" class="place-order-btn" id="placeOrderBtn">Place Order</button>
+      </form>
+    </div>
+
+    <div class="confirm-view" id="confirmView">
+      <div class="check">✅</div>
+      <h3>Order placed!</h3>
+      <p>Thank you — Grandma's already packing your order.</p>
+      <div class="order-id" id="orderIdBox">TGH-000000</div>
+      <p id="confirmSummary"></p>
+      <div id="payNowBox" style="display:none; margin-top:16px;">
+        <button class="place-order-btn" id="payNowBtn" type="button">💳 Pay Online Now</button>
+        <p class="verify-note" style="margin-top:8px;">Or arrange payment with Grandma directly — either works.</p>
+      </div>
+      <p id="paidMsg" style="display:none; color:var(--sage); font-weight:700; margin-top:10px;">✅ Payment received — thank you!</p>
+      <button class="confirm-close" onclick="closeCart()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Registration / login / account panel -->
+<div class="overlay" id="authOverlay">
+  <div class="cart-panel">
+    <button class="close-btn" onclick="closeAuth()">✕</button>
+
+    <div id="authLoggedOut">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLoginBtn" onclick="switchAuthTab('login')">Login</button>
+        <button class="auth-tab" id="tabRegisterBtn" onclick="switchAuthTab('register')">Register</button>
+      </div>
+
+      <div class="auth-view show" id="loginView">
+        <h3>Welcome back</h3>
+        <form class="order-form" id="loginForm">
+          <input type="tel" id="loginPhone" placeholder="Phone number" required>
+          <input type="password" id="loginPassword" placeholder="Password" required>
+          <p class="form-error" id="loginError"></p>
+          <button type="submit" class="place-order-btn" id="loginBtn">Log In</button>
+        </form>
+        <p class="forgot-pw">Forgot your password? <a href="#" id="forgotPwLink">Reset it here</a></p>
+      </div>
+
+      <div class="auth-view" id="forgotView">
+        <h3>Reset your password</h3>
+        <p class="verify-note">Enter the phone number on your account — we'll email a reset code to the address on file.</p>
+        <form class="order-form" id="forgotForm">
+          <input type="tel" id="forgotPhone" placeholder="Phone number" required>
+          <p class="form-error" id="forgotError"></p>
+          <button type="submit" class="place-order-btn" id="forgotBtn">Send Reset Code</button>
+        </form>
+        <p class="forgot-pw">Remembered it? <a href="#" onclick="switchAuthTab('login'); return false;">Back to login</a></p>
+      </div>
+
+      <div class="auth-view" id="resetView">
+        <h3>Enter your new password</h3>
+        <p class="verify-note">We emailed a 6-digit code to the address on file for this account.</p>
+        <form class="order-form" id="resetForm">
+          <input type="text" id="resetCode" placeholder="6-digit code" maxlength="6" inputmode="numeric" required>
+          <input type="password" id="resetNewPassword" placeholder="New password (min. 4 characters)" required>
+          <p class="form-error" id="resetError"></p>
+          <button type="submit" class="place-order-btn" id="resetBtn">Reset Password</button>
+        </form>
+        <p class="forgot-pw">Didn't get it? <a href="#" id="resendResetLink">Resend code</a></p>
+      </div>
+
+      <div class="auth-view" id="registerView">
+        <h3>Create your account</h3>
+        <form class="order-form" id="registerForm">
+          <input type="text" id="regName" placeholder="Full name" required>
+          <input type="tel" id="regPhone" placeholder="Phone number" required>
+          <input type="email" id="regEmail" placeholder="Email address" required>
+          <input type="password" id="regPassword" placeholder="Password (min. 4 characters)" required>
+          <textarea id="regAddress" placeholder="Delivery address (optional, saves time at checkout)"></textarea>
+          <p class="form-error" id="registerError"></p>
+          <button type="submit" class="place-order-btn" id="registerBtn">Create Account</button>
+        </form>
+      </div>
+
+      <div class="auth-view" id="verifyView">
+        <h3>Check your email</h3>
+        <p class="verify-note">We sent a 6-digit code to <strong id="verifyEmailLabel"></strong>. Enter it below to activate your account.</p>
+        <form class="order-form" id="verifyForm">
+          <input type="text" id="verifyCode" placeholder="6-digit code" maxlength="6" inputmode="numeric" required>
+          <p class="form-error" id="verifyError"></p>
+          <button type="submit" class="place-order-btn" id="verifyBtn">Verify & Continue</button>
+        </form>
+        <p class="forgot-pw">Didn't get it? <a href="#" id="resendCodeLink">Resend code</a></p>
+      </div>
+    </div>
+
+    <div id="authLoggedIn" style="display:none;">
+      <div class="auth-welcome">
+        <div class="check">👋</div>
+        <h3 id="welcomeName">Welcome back!</h3>
+        <p>Here's your order history with TGH.</p>
+      </div>
+      <div class="account-orders" id="accountOrders">
+        <p class="account-orders-empty">Loading your orders…</p>
+      </div>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- state ----
+  const products = {
+    'honey-small': { name: 'Honey — Small Bottle 🍯', price: 500 },
+    'honey-medium': { name: 'Honey — Medium Bottle 🍯', price: 1000 },
+    'honey-large': { name: 'Honey — Large Bottle 🍯', price: 3000 },
+    'honey-xl': { name: 'Honey — Extra Large Bottle 🍯', price: 5000 },
+    broom: { name: 'Handwoven Broom 🧹', price: 200 }
+  };
+  const qty = { 'honey-small': 1, 'honey-medium': 1, 'honey-large': 1, 'honey-xl': 1, broom: 1 };
+  let cart = []; // { id, name, price, quantity }
+
+  // ---- account state ----
+  let authToken = localStorage.getItem('tgh_token') || null;
+  let currentUser = JSON.parse(localStorage.getItem('tgh_user') || 'null');
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function formatNaira(amount){
+    return '₦' + amount.toLocaleString('en-NG');
+  }
+
+  function changeQty(id, delta){
+    qty[id] = Math.max(1, qty[id] + delta);
+    document.getElementById('qty-' + id).textContent = qty[id];
+  }
+
+  function addToCart(id, name, price){
+    const existing = cart.find(item => item.id === id);
+    if(existing){
+      existing.quantity += qty[id];
+    } else {
+      cart.push({ id, name, price, quantity: qty[id] });
+    }
+    const btn = document.getElementById('add-' + id);
+    btn.textContent = 'Added ✓';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = 'Add to Cart'; btn.classList.remove('added'); }, 1200);
+    renderCart();
+    updateCartCount();
+  }
+
+  function removeFromCart(id){
+    cart = cart.filter(item => item.id !== id);
+    renderCart();
+    updateCartCount();
+  }
+
+  function updateCartCount(){
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cartCount').textContent = count;
+  }
+
+  function renderCart(){
+    const container = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    if(cart.length === 0){
+      container.innerHTML = '<p class="cart-empty">Your cart is empty. Add some honey or a broom!</p>';
+      totalEl.textContent = formatNaira(0);
+      return;
+    }
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div>
+          <div class="name">${item.name}</div>
+          <div>Qty: ${item.quantity} · ${formatNaira(item.price * item.quantity)}</div>
+        </div>
+        <button class="remove" onclick="removeFromCart('${item.id}')">Remove</button>
+      </div>
+    `).join('');
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    totalEl.textContent = formatNaira(total);
+  }
+
+  function openCart(){
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartView').style.display = 'block';
+    document.getElementById('confirmView').classList.remove('show');
+    if(currentUser){
+      document.getElementById('custName').value = currentUser.name || '';
+      document.getElementById('custPhone').value = currentUser.phone || '';
+      document.getElementById('custEmail').value = currentUser.email || '';
+      document.getElementById('custAddress').value = currentUser.address || '';
+    }
+  }
+  function closeCart(){
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  // ---- account: registration, login, session ----
+  function updateAccountUI(){
+    const btn = document.getElementById('accountBtn');
+    const label = document.getElementById('accountBtnLabel');
+    if(currentUser){
+      label.textContent = currentUser.name.split(' ')[0];
+      btn.classList.add('logged-in');
+    } else {
+      label.textContent = 'Login';
+      btn.classList.remove('logged-in');
+    }
+  }
+
+  function openAuth(){
+    document.getElementById('authOverlay').classList.add('open');
+    if(currentUser){
+      document.getElementById('authLoggedOut').style.display = 'none';
+      document.getElementById('authLoggedIn').style.display = 'block';
+      document.getElementById('welcomeName').textContent = 'Hi, ' + currentUser.name + '!';
+      loadMyOrders();
+    } else {
+      document.getElementById('authLoggedOut').style.display = 'block';
+      document.getElementById('authLoggedIn').style.display = 'none';
+      switchAuthTab('login');
+    }
+  }
+  function closeAuth(){
+    document.getElementById('authOverlay').classList.remove('open');
+  }
+
+  let pendingVerifyPhone = null;
+  let pendingResetPhone = null;
+
+  const allAuthViews = ['loginView', 'registerView', 'verifyView', 'forgotView', 'resetView'];
+  function hideAllAuthViews(){
+    allAuthViews.forEach(id => document.getElementById(id).classList.remove('show'));
+  }
+
+  function switchAuthTab(tab){
+    const isLogin = tab === 'login';
+    document.getElementById('tabLoginBtn').classList.toggle('active', isLogin);
+    document.getElementById('tabRegisterBtn').classList.toggle('active', !isLogin);
+    hideAllAuthViews();
+    document.getElementById(isLogin ? 'loginView' : 'registerView').classList.add('show');
+  }
+
+  function showVerifyView(phone, email){
+    pendingVerifyPhone = phone;
+    hideAllAuthViews();
+    document.getElementById('verifyView').classList.add('show');
+    document.getElementById('verifyEmailLabel').textContent = email || 'your email';
+  }
+
+  function showForgotView(){
+    hideAllAuthViews();
+    document.getElementById('forgotView').classList.add('show');
+  }
+
+  function showResetView(phone){
+    pendingResetPhone = phone;
+    hideAllAuthViews();
+    document.getElementById('resetView').classList.add('show');
+  }
+
+  function handleAuthSuccess(data){
+    authToken = data.token;
+    currentUser = data.user;
+    localStorage.setItem('tgh_token', authToken);
+    localStorage.setItem('tgh_user', JSON.stringify(currentUser));
+    updateAccountUI();
+    closeAuth();
+  }
+
+  function logout(){
+    authToken = null;
+    currentUser = null;
+    localStorage.removeItem('tgh_token');
+    localStorage.removeItem('tgh_user');
+    updateAccountUI();
+    closeAuth();
+  }
+
+  document.getElementById('registerForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const address = document.getElementById('regAddress').value.trim();
+    const errorEl = document.getElementById('registerError');
+    const btn = document.getElementById('registerBtn');
+
+    errorEl.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Creating account...';
+
+    fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, password, address })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not create your account.');
+        document.getElementById('registerForm').reset();
+        showVerifyView(data.phone, data.email);
+      })
+      .catch(err => {
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      });
+  });
+
+  document.getElementById('verifyForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const code = document.getElementById('verifyCode').value.trim();
+    const errorEl = document.getElementById('verifyError');
+    const btn = document.getElementById('verifyBtn');
+
+    errorEl.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Verifying...';
+
+    fetch('/api/auth/verify-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: pendingVerifyPhone, code })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not verify your account.');
+        document.getElementById('verifyForm').reset();
+        handleAuthSuccess(data);
+      })
+      .catch(err => {
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Verify & Continue';
+      });
+  });
+
+  document.getElementById('resendCodeLink').addEventListener('click', function(e){
+    e.preventDefault();
+    if(!pendingVerifyPhone) return;
+    const errorEl = document.getElementById('verifyError');
+    errorEl.classList.remove('show');
+    fetch('/api/auth/resend-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: pendingVerifyPhone })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not resend the code.');
+        errorEl.style.color = 'var(--sage)';
+        errorEl.textContent = 'A new code has been sent!';
+        errorEl.classList.add('show');
+      })
+      .catch(err => {
+        errorEl.style.color = 'var(--rust)';
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      });
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const phone = document.getElementById('loginPhone').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+    const btn = document.getElementById('loginBtn');
+
+    errorEl.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Logging in...';
+
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, password })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok){
+          if(data.needsVerification){
+            document.getElementById('loginForm').reset();
+            showVerifyView(data.phone, null);
+            throw new Error('__handled__');
+          }
+          throw new Error(data.error || 'Could not log you in.');
+        }
+        handleAuthSuccess(data);
+        document.getElementById('loginForm').reset();
+      })
+      .catch(err => {
+        if(err.message === '__handled__') return;
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+      });
+  });
+
+  document.getElementById('forgotPwLink').addEventListener('click', function(e){
+    e.preventDefault();
+    showForgotView();
+  });
+
+  document.getElementById('forgotForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const phone = document.getElementById('forgotPhone').value.trim();
+    const errorEl = document.getElementById('forgotError');
+    const btn = document.getElementById('forgotBtn');
+
+    errorEl.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    fetch('/api/auth/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not send a reset code.');
+        document.getElementById('forgotForm').reset();
+        showResetView(phone);
+      })
+      .catch(err => {
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send Reset Code';
+      });
+  });
+
+  document.getElementById('resetForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const code = document.getElementById('resetCode').value.trim();
+    const newPassword = document.getElementById('resetNewPassword').value;
+    const errorEl = document.getElementById('resetError');
+    const btn = document.getElementById('resetBtn');
+
+    errorEl.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Resetting...';
+
+    fetch('/api/auth/reset-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: pendingResetPhone, code, newPassword })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not reset your password.');
+        document.getElementById('resetForm').reset();
+        handleAuthSuccess(data);
+      })
+      .catch(err => {
+        errorEl.textContent = err.message;
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Reset Password';
+      });
+  });
+
+  document.getElementById('resendResetLink').addEventListener('click', function(e){
+    e.preventDefault();
+    if(!pendingResetPhone) return;
+    const errorEl = document.getElementById('resetError');
+    errorEl.classList.remove('show');
+    fetch('/api/auth/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: pendingResetPhone })
+    })
+      .then(() => {
+        errorEl.style.color = 'var(--sage)';
+        errorEl.textContent = 'A new code has been sent!';
+        errorEl.classList.add('show');
+      });
+  });
+
+  function loadMyOrders(){
+    const container = document.getElementById('accountOrders');
+    container.innerHTML = '<p class="account-orders-empty">Loading your orders…</p>';
+    fetch('/api/orders/mine', { headers: { 'Authorization': 'Bearer ' + authToken } })
+      .then(res => {
+        if(res.status === 401){ logout(); throw new Error('session-expired'); }
+        return res.json();
+      })
+      .then(orders => {
+        if(!orders.length){
+          container.innerHTML = '<p class="account-orders-empty">No orders yet — go grab some honey! 🍯</p>';
+          return;
+        }
+        container.innerHTML = orders.map(o => `
+          <div class="account-order">
+            <span class="oid">${escapeHtml(o.orderId)}</span><span class="ostatus">${escapeHtml(o.status.replace(/_/g,' '))}</span>
+            <div class="oitems">${escapeHtml(o.items.map(i => `${i.quantity}× ${i.name}`).join(', '))}</div>
+            <div class="oitems">${formatNaira(o.total)} · ${new Date(o.createdAt).toLocaleDateString()}</div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        if(err.message !== 'session-expired'){
+          container.innerHTML = '<p class="account-orders-empty">Could not load your orders.</p>';
+        }
+      });
+  }
+
+  updateAccountUI();
+
+  // ---- online payment (Paystack) — optional, only shown if configured ----
+  let paymentsConfig = { enabled: false, publicKey: '' };
+  fetch('/api/payments/config').then(res => res.json()).then(cfg => { paymentsConfig = cfg; }).catch(() => {});
+
+  function offerPayment(order){
+    const box = document.getElementById('payNowBox');
+    const paidMsg = document.getElementById('paidMsg');
+    paidMsg.style.display = 'none';
+
+    if(!paymentsConfig.enabled || !order.email){
+      box.style.display = 'none';
+      return;
+    }
+    box.style.display = 'block';
+
+    document.getElementById('payNowBtn').onclick = function(){
+      if(typeof PaystackPop === 'undefined'){
+        alert('Payment is loading — please try again in a moment.');
+        return;
+      }
+      const handler = PaystackPop.setup({
+        key: paymentsConfig.publicKey,
+        email: order.email,
+        amount: order.total * 100, // kobo
+        ref: order.orderId + '-' + Date.now(),
+        currency: 'NGN',
+        callback: function(response){
+          fetch('/api/payments/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reference: response.reference, orderId: order.orderId })
+          })
+            .then(res => res.json().then(data => ({ ok: res.ok, data })))
+            .then(({ ok, data }) => {
+              if(!ok) throw new Error(data.error || 'Could not confirm payment.');
+              box.style.display = 'none';
+              paidMsg.style.display = 'block';
+            })
+            .catch(err => alert('Payment made, but we could not confirm it automatically: ' + err.message + ' — please message us on WhatsApp with your order ID.'));
+        },
+        onClose: function(){}
+      });
+      handler.openIframe();
+    };
+  }
+
+  // ---- real backend order submission ----
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const email = document.getElementById('custEmail').value.trim();
+    const address = document.getElementById('custAddress').value.trim();
+    const errorEl = document.getElementById('formError');
+
+    if(!name || !phone || !address || cart.length === 0){
+      errorEl.textContent = 'Please fill in all fields and add at least one item.';
+      errorEl.classList.add('show');
+      return;
+    }
+    errorEl.classList.remove('show');
+
+    const btn = document.getElementById('placeOrderBtn');
+    btn.disabled = true;
+    btn.textContent = 'Placing order...';
+
+    const payload = {
+      name, phone, email, address,
+      items: cart.map(item => ({ id: item.id, quantity: item.quantity }))
+    };
+
+    const orderHeaders = { 'Content-Type': 'application/json' };
+    if(authToken) orderHeaders['Authorization'] = 'Bearer ' + authToken;
+
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: orderHeaders,
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok){
+          throw new Error(data.error || 'Something went wrong placing your order.');
+        }
+
+        const itemSummary = data.items.map(item => `${item.quantity}× ${item.name}`).join(', ');
+        document.getElementById('orderIdBox').textContent = data.orderId;
+        document.getElementById('confirmSummary').textContent =
+          `${itemSummary} — Total ${formatNaira(data.total)}, delivered to ${data.name} at ${data.address}.`;
+
+        document.getElementById('cartView').style.display = 'none';
+        document.getElementById('confirmView').classList.add('show');
+        offerPayment(data);
+
+        cart = [];
+        updateCartCount();
+        renderCart();
+        document.getElementById('orderForm').reset();
+      })
+      .catch(err => {
+        errorEl.textContent = err.message + ' (Is the TGH backend server running?)';
+        errorEl.classList.add('show');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Place Order';
+      });
+  });
+
+  // ---- Share section: QR code + copy link + native share ----
+  const pageUrl = window.location.href;
+  const shareInput = document.getElementById('shareLinkInput');
+  const qrImage = document.getElementById('qrImage');
+  const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+
+  if(shareInput) shareInput.value = pageUrl;
+  if(qrImage){
+    qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(pageUrl);
+  }
+  if(whatsappShareBtn){
+    whatsappShareBtn.href = 'https://wa.me/?text=' + encodeURIComponent("Check out Thansics Grandma's Honey & Broom (TGH): " + pageUrl);
+  }
+
+  function copyShareLink(){
+    navigator.clipboard.writeText(pageUrl).then(() => {
+      const msg = document.getElementById('copiedMsg');
+      msg.classList.add('show');
+      setTimeout(() => msg.classList.remove('show'), 2000);
+    }).catch(() => {
+      shareInput.select();
+      shareInput.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+    });
+  }
+
+  function nativeShare(){
+    if(navigator.share){
+      navigator.share({
+        title: "Thansics Grandma's Honey & Broom (TGH)",
+        text: 'Real honey, handmade brooms — order online!',
+        url: pageUrl
+      }).catch(() => {});
+    } else {
+      copyShareLink();
+    }
+  }
+</script>
+
+</body>
+</html>
