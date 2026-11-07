@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGH Admin — Orders Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EA; --cream-2:#FCEFD4; --walnut:#3B2412; --walnut-soft:#6B5340;
+    --honey:#E8A33D; --honey-dark:#C97F1E; --rust:#B5461C; --sage:#7C8B52; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{ font-family:'Work Sans',sans-serif; background:var(--cream); color:var(--walnut); padding:28px 18px 60px; }
+  h1{ font-family:'Fraunces',serif; font-size:1.6rem; margin-bottom:4px; }
+  .sub{ color:var(--walnut-soft); font-size:.9rem; margin-bottom:26px; }
+  .wrap{ max-width:900px; margin:0 auto; }
+
+  .login-card{
+    max-width:360px; margin:60px auto; background:#fff; border:2px solid var(--walnut);
+    border-radius:var(--radius); padding:28px; text-align:center;
+  }
+  .login-card h2{ font-family:'Fraunces'; font-size:1.2rem; margin-bottom:6px; }
+  .login-card p{ font-size:.85rem; color:var(--walnut-soft); margin-bottom:18px; }
+  .login-card input{
+    width:100%; padding:11px 14px; border-radius:8px; border:2px solid var(--walnut-soft);
+    font-family:inherit; margin-bottom:14px; font-size:.9rem;
+  }
+  .login-card button{
+    width:100%; background:var(--rust); color:#fff; font-weight:700; padding:12px;
+    border-radius:8px; border:none; font-size:.9rem; cursor:pointer;
+  }
+  .login-error{ color:var(--rust); font-size:.8rem; margin-top:10px; display:none; }
+  .login-error.show{ display:block; }
+
+  #dashboard{ display:none; }
+  #dashboard.show{ display:block; }
+
+  .stats-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:24px; }
+  .stat{
+    background:#fff; border:2px solid var(--walnut); border-radius:var(--radius);
+    padding:16px 20px; flex:1; min-width:140px;
+  }
+  .stat strong{ display:block; font-family:'Fraunces'; font-size:1.4rem; color:var(--rust); }
+  .stat span{ font-size:.78rem; color:var(--walnut-soft); font-weight:600; }
+
+  .refresh-btn{
+    background:var(--walnut); color:var(--cream); border:none; padding:9px 16px;
+    border-radius:999px; font-weight:700; font-size:.82rem; cursor:pointer; margin-bottom:18px;
+  }
+
+  .panel-tabs{ display:flex; gap:10px; margin-bottom:18px; }
+  .panel-tab{
+    background:#fff; border:2px solid var(--walnut); color:var(--walnut); font-weight:700;
+    padding:9px 18px; border-radius:999px; font-size:.85rem; cursor:pointer;
+  }
+  .panel-tab.active{ background:var(--walnut); color:var(--cream); }
+  .panel-view{ display:none; }
+  .panel-view.show{ display:block; }
+  .reset-btn{ background:none; border:none; color:var(--honey-dark); font-weight:700; font-size:.78rem; cursor:pointer; }
+
+  table{ width:100%; border-collapse:collapse; background:#fff; border-radius:var(--radius); overflow:hidden; border:2px solid var(--walnut); }
+  th, td{ padding:12px 14px; text-align:left; font-size:.85rem; border-bottom:1px solid #eee; }
+  th{ background:var(--cream-2); font-weight:700; }
+  tr:last-child td{ border-bottom:none; }
+  .empty-row td{ text-align:center; color:var(--walnut-soft); padding:30px; }
+
+  select.status-select{
+    padding:6px 8px; border-radius:6px; border:1.5px solid var(--walnut-soft); font-family:inherit; font-size:.8rem;
+  }
+  .del-btn{ background:none; border:none; color:var(--rust); font-weight:700; font-size:.78rem; cursor:pointer; }
+
+  @media (max-width:640px){
+    table, thead, tbody, th, td, tr{ display:block; }
+    thead{ display:none; }
+    tr{ margin-bottom:14px; border:1.5px solid #eee; border-radius:10px; overflow:hidden; }
+    td{ display:flex; justify-content:space-between; gap:10px; }
+    td::before{ content:attr(data-label); font-weight:700; color:var(--walnut-soft); }
+  }
+</style>
+</head>
+<body>
+
+<div class="login-card" id="loginCard">
+  <h2>👵 TGH Admin Login</h2>
+  <p>Enter the admin key to view incoming orders.</p>
+  <input type="password" id="adminKeyInput" placeholder="Admin key">
+  <button onclick="login()">View Orders</button>
+  <p class="login-error" id="loginError">Incorrect admin key. Try again.</p>
+</div>
+
+<div class="wrap" id="dashboard">
+  <h1>🍯 TGH Orders Dashboard</h1>
+  <p class="sub">Live orders & accounts on the platform.</p>
+
+  <div class="stats-row">
+    <div class="stat"><strong id="statCount">0</strong><span>Total Orders</span></div>
+    <div class="stat"><strong id="statRevenue">₦0</strong><span>Total Revenue</span></div>
+    <div class="stat"><strong id="statPending">0</strong><span>Awaiting Preparation</span></div>
+    <div class="stat"><strong id="statUsers">0</strong><span>Registered Customers</span></div>
+  </div>
+
+  <div class="panel-tabs">
+    <button class="panel-tab active" id="ordersTabBtn" onclick="switchPanel('orders')">Orders</button>
+    <button class="panel-tab" id="usersTabBtn" onclick="switchPanel('users')">Customers</button>
+  </div>
+
+  <div class="panel-view show" id="ordersPanel">
+    <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Paid</th><th>Status</th><th>Placed</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody">
+        <tr class="empty-row"><td colspan="8">Loading orders…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-view" id="usersPanel">
+    <button class="refresh-btn" onclick="loadUsers()">🔄 Refresh</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Phone</th><th>Email</th><th>Verified</th><th>Address</th><th>Joined</th><th></th><th></th>
+        </tr>
+      </thead>
+      <tbody id="usersBody">
+        <tr class="empty-row"><td colspan="8">Loading customers…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let adminKey = '';
+
+  function login(){
+    const key = document.getElementById('adminKeyInput').value.trim();
+    if(!key){ return; }
+    adminKey = key;
+    fetch('/api/admin/orders', { headers: { 'X-Admin-Key': adminKey } })
+      .then(res => {
+        if(!res.ok) throw new Error('Unauthorized');
+        return res.json();
+      })
+      .then(orders => {
+        document.getElementById('loginCard').style.display = 'none';
+        document.getElementById('dashboard').classList.add('show');
+        sessionStorage.setItem('tghAdminKey', adminKey);
+        renderOrders(orders);
+        loadUsers();
+      })
+      .catch(() => {
+        document.getElementById('loginError').classList.add('show');
+      });
+  }
+
+  function loadOrders(){
+    fetch('/api/admin/orders', { headers: { 'X-Admin-Key': adminKey } })
+      .then(res => res.json())
+      .then(renderOrders);
+  }
+
+  function formatNaira(n){ return '₦' + Number(n).toLocaleString('en-NG'); }
+
+  // Escapes anything a customer typed (name, address, etc.) before it's
+  // inserted as HTML — without this, someone could type something like
+  // <script> into their name and have it run in your browser.
+  function escapeHtml(str){
+    return String(str ?? '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[c]));
+  }
+
+  function renderOrders(orders){
+    const body = document.getElementById('ordersBody');
+    document.getElementById('statCount').textContent = orders.length;
+    document.getElementById('statRevenue').textContent = formatNaira(orders.reduce((s,o)=>s+o.total,0));
+    document.getElementById('statPending').textContent = orders.filter(o => o.status === 'received').length;
+
+    if(orders.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="8">No orders yet.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = orders.map(o => `
+      <tr>
+        <td data-label="Order ID"><strong>${escapeHtml(o.orderId)}</strong></td>
+        <td data-label="Customer">${escapeHtml(o.name)}<br><small>${escapeHtml(o.phone)}</small></td>
+        <td data-label="Items">${escapeHtml(o.items.map(i => `${i.quantity}× ${i.name}`).join(', '))}</td>
+        <td data-label="Total">${formatNaira(o.total)}</td>
+        <td data-label="Paid">${o.paymentStatus === 'paid' ? '✅ Paid' : '— Unpaid'}</td>
+        <td data-label="Status">
+          <select class="status-select" onchange="updateStatus('${o.orderId}', this.value)">
+            ${['received','preparing','out_for_delivery','completed'].map(s =>
+              `<option value="${s}" ${o.status === s ? 'selected' : ''}>${s.replace(/_/g,' ')}</option>`
+            ).join('')}
+          </select>
+        </td>
+        <td data-label="Placed">${new Date(o.createdAt).toLocaleString()}</td>
+        <td data-label=""><button class="del-btn" onclick="deleteOrder('${o.orderId}')">Delete</button></td>
+      </tr>
+    `).join('');
+  }
+
+  function updateStatus(orderId, status){
+    fetch('/api/admin/orders/' + orderId, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey },
+      body: JSON.stringify({ status })
+    }).then(loadOrders);
+  }
+
+  function deleteOrder(orderId){
+    if(!confirm('Delete order ' + orderId + '?')) return;
+    fetch('/api/admin/orders/' + orderId, {
+      method: 'DELETE',
+      headers: { 'X-Admin-Key': adminKey }
+    }).then(loadOrders);
+  }
+
+  function switchPanel(panel){
+    const isOrders = panel === 'orders';
+    document.getElementById('ordersTabBtn').classList.toggle('active', isOrders);
+    document.getElementById('usersTabBtn').classList.toggle('active', !isOrders);
+    document.getElementById('ordersPanel').classList.toggle('show', isOrders);
+    document.getElementById('usersPanel').classList.toggle('show', !isOrders);
+    if(!isOrders) loadUsers();
+  }
+
+  function loadUsers(){
+    fetch('/api/admin/users', { headers: { 'X-Admin-Key': adminKey } })
+      .then(res => res.json())
+      .then(renderUsers);
+  }
+
+  function renderUsers(users){
+    document.getElementById('statUsers').textContent = users.length;
+    const body = document.getElementById('usersBody');
+    if(users.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="8">No registered customers yet.</td></tr>';
+      return;
+    }
+    body.innerHTML = users.map(u => `
+      <tr>
+        <td data-label="Name"><strong>${escapeHtml(u.name)}</strong></td>
+        <td data-label="Phone">${escapeHtml(u.phone)}</td>
+        <td data-label="Email">${escapeHtml(u.email) || '—'}</td>
+        <td data-label="Verified">${u.emailVerified ? '✅' : '⏳ pending'}</td>
+        <td data-label="Address">${escapeHtml(u.address) || '—'}</td>
+        <td data-label="Joined">${new Date(u.createdAt || Date.now()).toLocaleDateString()}</td>
+        <td data-label=""><button class="reset-btn" onclick="resetPassword('${u.id}', '${u.name.replace(/'/g, "\\'")}')">Reset password</button></td>
+        <td data-label=""><button class="del-btn" onclick="deleteUser('${u.id}', '${u.name.replace(/'/g, "\\'")}')">Delete</button></td>
+      </tr>
+    `).join('');
+  }
+
+  function resetPassword(userId, name){
+    const newPassword = prompt('New password for ' + name + ' (min. 4 characters):');
+    if(!newPassword) return;
+    fetch('/api/admin/users/' + userId + '/reset-password', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey },
+      body: JSON.stringify({ newPassword })
+    })
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if(!ok) throw new Error(data.error || 'Could not reset password.');
+        alert('Password reset. Share the new password with ' + name + ' directly (e.g. over WhatsApp).');
+      })
+      .catch(err => alert(err.message));
+  }
+
+  function deleteUser(userId, name){
+    if(!confirm('Delete the account for ' + name + '? Their past orders stay on record.')) return;
+    fetch('/api/admin/users/' + userId, {
+      method: 'DELETE',
+      headers: { 'X-Admin-Key': adminKey }
+    }).then(loadUsers);
+  }
+
+  // auto-login if key already stored in this browser session
+  const savedKey = sessionStorage.getItem('tghAdminKey');
+  if(savedKey){
+    document.getElementById('adminKeyInput').value = savedKey;
+    login();
+  }
+</script>
+
+</body>
+</html>
